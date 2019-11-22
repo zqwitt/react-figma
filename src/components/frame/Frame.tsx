@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { DefaultContainerProps } from '../../types';
+import { DefaultContainerProps, StyleOf } from '../../types';
 import {
     LayoutStyleProperties,
     transformLayoutStyleProperties
 } from '../../styleTransformers/transformLayoutStyleProperties';
-import { useYogaLayout, YogaContextProvider } from '../../hooks/useYogaLayout';
+import { useYogaLayout } from '../../hooks/useYogaLayout';
 import { transformBlendProperties, BlendStyleProperties } from '../../styleTransformers/transformBlendProperties';
+import {
+    GeometryStyleProperties,
+    transformGeometryStyleProperties
+} from '../../styleTransformers/transformGeometryStyleProperties';
+import { YogaStyleProperties } from '../../yoga/YogaStyleProperties';
+import { StyleSheet } from '../../helpers/StyleSheet';
 
 interface Preset {
     name: string;
@@ -181,22 +187,25 @@ export const FRAME_PRESETS = {
     }
 };
 
-export interface FrameProps extends DefaultContainerProps {
-    style?: LayoutStyleProperties & BlendStyleProperties;
+export interface FrameNodeProps extends DefaultContainerProps {
+    style?: StyleOf<GeometryStyleProperties & YogaStyleProperties & LayoutStyleProperties & BlendStyleProperties>;
     preset?: Preset;
 }
 
-export const Frame: React.ElementType<FrameProps> = props => {
-    const yogaRef = React.useRef();
+export const Frame: React.FC<FrameNodeProps> = props => {
+    const nodeRef = React.useRef();
+
+    const style = StyleSheet.flatten(props.style);
 
     const { preset, ...propWithoutPreset } = props;
     const frameProps = {
         ...(preset || {}),
-        ...transformLayoutStyleProperties(props.style),
-        ...transformBlendProperties(props.style),
+        ...transformLayoutStyleProperties(style),
+        ...transformBlendProperties(style),
+        ...transformGeometryStyleProperties('backgrounds', style),
         ...propWithoutPreset
     };
-    const yogaChildProps = useYogaLayout({ yogaRef, ...frameProps });
+    const yogaChildProps = useYogaLayout({ nodeRef, ...frameProps });
 
-    return <frame {...frameProps} {...yogaChildProps} innerRef={yogaRef} />;
+    return <frame {...frameProps} {...yogaChildProps} innerRef={nodeRef} />;
 };

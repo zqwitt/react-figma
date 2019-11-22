@@ -1,4 +1,7 @@
+import * as React from 'react';
 export type Color = string;
+
+export type StyleOf<T> = T | T[];
 
 export interface BaseNodeProps {
     name?: string;
@@ -23,7 +26,7 @@ export interface LayoutProps {
 }
 
 export interface ChildrenProps {
-    children?: ReadonlyArray<BaseNode>;
+    children?: React.ReactNode;
 }
 
 export interface GeometryProps {
@@ -38,6 +41,10 @@ export interface GeometryProps {
     strokeStyleId?: string;
 }
 
+export interface FrameProps {
+    backgrounds?: ReadonlyArray<Paint>;
+}
+
 export interface CornerProps {
     cornerRadius?: number | symbol;
     cornerSmoothing?: number;
@@ -48,6 +55,20 @@ export interface BorderProps {
     topRightRadius?: number;
     bottomLeftRadius?: number;
     bottomRightRadius?: number;
+}
+
+export interface ExportProps {
+    exportSettings?: ReadonlyArray<ExportSettings>;
+    exportAsyncSettings?: ExportSettings;
+    exportAsyncCallback?: (result: Uint8Array) => any;
+}
+
+export interface BlendProps {
+    opacity?: number;
+    blendMode?: BlendMode;
+    isMask?: boolean;
+    effects?: ReadonlyArray<Effect>;
+    effectStyleId?: string;
 }
 
 export interface TextNodeProps {
@@ -67,20 +88,6 @@ export interface TextNodeProps {
     lineHeight?: LineHeight | symbol;
 }
 
-export interface ExportProps {
-    exportSettings?: ExportSettings[];
-    exportAsyncSettings?: ExportSettings;
-    exportAsyncCallback?: (result: Uint8Array) => any;
-}
-
-export interface BlendProps {
-    opacity?: number;
-    blendMode?: BlendMode;
-    isMask?: boolean;
-    effects?: ReadonlyArray<Effect>;
-    effectStyleId?: string;
-}
-
 export interface VectorNodeProps {
     vectorPaths?: VectorPaths;
     vectorNetwork?: VectorNetwork;
@@ -94,4 +101,10 @@ export interface StarNodeProps {
 
 export interface DefaultShapeProps extends BaseNodeProps, LayoutProps, GeometryProps, ExportProps, BlendProps {}
 
-export interface DefaultContainerProps extends BaseNodeProps, ChildrenProps, LayoutProps, ExportProps, BlendProps {}
+export interface DefaultContainerProps
+    extends BaseNodeProps,
+        ChildrenProps,
+        LayoutProps,
+        ExportProps,
+        BlendProps,
+        FrameProps {}

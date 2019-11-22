@@ -1,7 +1,6 @@
 export { render } from './renderer';
 export { uiWorker } from './uiWorker';
 export { subscribeOnMessages } from './helpers/messagePromise';
-export { YogaContextProvider } from './hooks/useYogaLayout';
 
 export { Text } from './components/text/Text';
 export { Rectangle } from './components/rectangle/Rectangle';
@@ -12,3 +11,10 @@ export { Group } from './components/group/Group';
 export { Star } from './components/star/Star';
 export { Vector } from './components/vector/Vector';
 export { Line } from './components/line/Line';
+export { Ellipse } from './components/ellipse/Ellipse';
+export { View } from './components/view/View';
+export { Svg } from './components/svg/Svg';
+export { Image } from './components/Image/Image';
+
+export { StyleSheet } from './helpers/StyleSheet';
+export { Platform } from './helpers/Platform';

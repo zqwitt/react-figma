@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DefaultShapeProps, VectorNodeProps, CornerProps } from '../../types';
+import { DefaultShapeProps, VectorNodeProps, CornerProps, StyleOf } from '../../types';
 import {
     LayoutStyleProperties,
     transformLayoutStyleProperties
@@ -11,22 +11,27 @@ import {
     transformGeometryStyleProperties,
     GeometryStyleProperties
 } from '../../styleTransformers/transformGeometryStyleProperties';
+import { YogaStyleProperties } from '../../yoga/YogaStyleProperties';
+import { StyleSheet } from '../..';
 
 export interface VectorProps extends VectorNodeProps, DefaultShapeProps, CornerProps {
-    style?: LayoutStyleProperties & BlendStyleProperties & GeometryStyleProperties;
+    style?: StyleOf<YogaStyleProperties & LayoutStyleProperties & BlendStyleProperties & GeometryStyleProperties>;
     children?: undefined;
 }
 
-export const Vector: React.ElementType<VectorProps> = props => {
-    const yogaRef = React.useRef();
+export const Vector: React.FC<VectorProps> = props => {
+    const nodeRef = React.useRef();
+
+    const style = StyleSheet.flatten(props.style);
+
     const vectorProps = {
-        ...transformLayoutStyleProperties(props.style),
-        ...transformBlendProperties(props.style),
-        ...transformGeometryStyleProperties(props.style),
+        ...transformLayoutStyleProperties(style),
+        ...transformBlendProperties(style),
+        ...transformGeometryStyleProperties('fills', style),
         ...props
     };
     const fills = useFillsPreprocessor(vectorProps);
-    const yogaProps = useYogaLayout({ yogaRef, ...vectorProps });
+    const yogaProps = useYogaLayout({ nodeRef, ...vectorProps });
     // @ts-ignore
-    return <vector {...vectorProps} {...yogaProps} {...(fills && { fills })} innerRef={yogaRef} />;
+    return <vector {...vectorProps} {...yogaProps} {...(fills && { fills })} innerRef={nodeRef} />;
 };

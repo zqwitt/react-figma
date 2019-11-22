@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DefaultShapeProps, BorderProps, CornerProps } from '../../types';
+import { DefaultShapeProps, BorderProps, CornerProps, StyleOf } from '../../types';
 import {
     LayoutStyleProperties,
     transformLayoutStyleProperties
@@ -10,23 +10,27 @@ import {
 } from '../../styleTransformers/transformGeometryStyleProperties';
 import { useYogaLayout } from '../../hooks/useYogaLayout';
 import { transformBlendProperties, BlendStyleProperties } from '../../styleTransformers/transformBlendProperties';
+import { YogaStyleProperties } from '../../yoga/YogaStyleProperties';
+import { StyleSheet } from '../..';
 
 export interface LineProps extends DefaultShapeProps, CornerProps, BorderProps {
-    style?: LayoutStyleProperties & GeometryStyleProperties & BlendStyleProperties;
+    style?: StyleOf<YogaStyleProperties & LayoutStyleProperties & GeometryStyleProperties & BlendStyleProperties>;
 }
 
-export const Line: React.ElementType<LineProps> = props => {
-    const yogaRef = React.useRef();
+export const Line: React.FC<LineProps> = props => {
+    const nodeRef = React.useRef();
+
+    const style = StyleSheet.flatten(props.style);
 
     const lineProps = {
-        ...transformLayoutStyleProperties(props.style),
-        ...transformGeometryStyleProperties(props.style),
-        ...transformBlendProperties(props.style),
+        ...transformLayoutStyleProperties(style),
+        ...transformGeometryStyleProperties('fills', style),
+        ...transformBlendProperties(style),
         ...props
     };
 
-    const yogaProps = useYogaLayout({ yogaRef, ...lineProps });
+    const yogaProps = useYogaLayout({ nodeRef, ...lineProps });
 
     // @ts-ignore
-    return <line {...lineProps} {...yogaProps} innerRef={yogaRef} />;
+    return <line {...lineProps} {...yogaProps} innerRef={nodeRef} />;
 };

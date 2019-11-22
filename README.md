@@ -2,7 +2,7 @@
 
 # React Figma
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 [![npm version](https://img.shields.io/npm/v/react-figma.svg)](https://www.npmjs.com/package/react-figma)
 [![CircleCI](https://circleci.com/gh/react-figma/react-figma.svg?style=svg)](https://circleci.com/gh/react-figma/react-figma)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-figma)
@@ -109,18 +109,7 @@ export const App = () => {
 * [design-system](examples/design-system)
 * [groups](examples/groups)
 
-## Roadmap
-
-* Adding components:
-  - Ellipse
-  - Etc.
-* Improving existing components:
-  - Adding support of all figma properties.
-  - Improving style prop support.
-  - Adding support of all yoga-layout properties.
-* react-primitives support.
-* HMR support.
-* styled-components support.
+## [Roadmap](docs/roadmap.md)
 
 ## Become a Contributor 🎖
 
@@ -139,6 +128,13 @@ Whether you're helping us implement features, fix bugs or improve the docs, we'd
 
 Check out our [Contributing Guide](./contributing.md) for ideas on contributing and setup steps for getting repository up and running on your local machine.
 
+## Acknowledgements
+
+React Figma team wishes to thank the following invaluable contributions:
+
+* [Lera Lesik](https://twitter.com/Lera_Lesik), for creating project logo.
+* [Maksim](https://github.com/pret-a-porter), for TypeScript counseling.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -152,6 +148,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/HVish"><img src="https://avatars1.githubusercontent.com/u/14261201?v=4" width="100px;" alt="Vishnu Singh"/><br /><sub><b>Vishnu Singh</b></sub></a><br /><a href="https://github.com/react-figma/react-figma/commits?author=HVish" title="Code">💻</a></td>
     <td align="center"><a href="http://corrinachow.com"><img src="https://avatars1.githubusercontent.com/u/35117708?v=4" width="100px;" alt="corrina"/><br /><sub><b>corrina</b></sub></a><br /><a href="https://github.com/react-figma/react-figma/commits?author=corrinachow" title="Code">💻</a></td>
     <td align="center"><a href="http://www.zacharyquintenwitt.com"><img src="https://avatars1.githubusercontent.com/u/5651980?v=4" width="100px;" alt="Zachary Witt"/><br /><sub><b>Zachary Witt</b></sub></a><br /><a href="https://github.com/react-figma/react-figma/commits?author=zqwitt" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/theashraf"><img src="https://avatars1.githubusercontent.com/u/39750790?v=4" width="100px;" alt="Abdelrahman Ashraf"/><br /><sub><b>Abdelrahman Ashraf</b></sub></a><br /><a href="https://github.com/react-figma/react-figma/commits?author=theashraf" title="Code">💻</a></td>
+    <td align="center"><a href="https://seanprashad.com"><img src="https://avatars2.githubusercontent.com/u/13009507?v=4" width="100px;" alt="sprashad"/><br /><sub><b>sprashad</b></sub></a><br /><a href="https://github.com/react-figma/react-figma/commits?author=SeanPrashad" title="Documentation">📖</a></td>
   </tr>
 </table>
 

@@ -3,7 +3,9 @@
 ## Content
 
 * Guides
+  + [Styling](./docs/styling.md)
   + [Architecture](./docs/architecture.md)
+  + [Roadmap](./docs/roadmap.md)
   + [Contributing](./contributing.md)
   + [Code of Conduct](./CODE_OF_CONDUCT.md)
 * Examples

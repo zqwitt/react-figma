@@ -1,25 +1,34 @@
 import * as React from 'react';
-import { DefaultShapeProps } from '../../types';
+import { DefaultShapeProps, StyleOf } from '../../types';
 import {
     LayoutStyleProperties,
     transformLayoutStyleProperties
 } from '../../styleTransformers/transformLayoutStyleProperties';
 import { useYogaLayout } from '../../hooks/useYogaLayout';
 import { BlendStyleProperties, transformBlendProperties } from '../../styleTransformers/transformBlendProperties';
+import { YogaStyleProperties } from '../../yoga/YogaStyleProperties';
+import { StyleSheet } from '../..';
+import {
+    GeometryStyleProperties,
+    transformGeometryStyleProperties
+} from '../../styleTransformers/transformGeometryStyleProperties';
 
-export interface GroupProps extends DefaultShapeProps {
-    style?: LayoutStyleProperties & BlendStyleProperties;
+export interface GroupNodeProps extends DefaultShapeProps {
+    style?: StyleOf<GeometryStyleProperties & YogaStyleProperties & LayoutStyleProperties & BlendStyleProperties>;
 }
 
-export const Group: React.ElementType<GroupProps> = props => {
-    const yogaRef = React.useRef();
+export const Group: React.FC<GroupNodeProps> = props => {
+    const nodeRef = React.useRef();
+
+    const style = StyleSheet.flatten(props.style);
 
     const groupProps = {
-        ...transformLayoutStyleProperties(props.style),
-        ...transformBlendProperties(props.style),
+        ...transformLayoutStyleProperties(style),
+        ...transformBlendProperties(style),
+        ...transformGeometryStyleProperties('backgrounds', style),
         ...props
     };
-    const yogaChildProps = useYogaLayout({ yogaRef, ...groupProps });
+    const yogaChildProps = useYogaLayout({ nodeRef, ...groupProps });
 
-    return <group {...groupProps} {...yogaChildProps} innerRef={yogaRef} />;
+    return <group {...groupProps} {...yogaChildProps} innerRef={nodeRef} />;
 };
