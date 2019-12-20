@@ -1,7 +1,13 @@
 import * as React from 'react';
+import { LayoutStyleProperties } from './styleTransformers/transformLayoutStyleProperties';
+import { YogaStyleProperties } from './yoga/YogaStyleProperties';
+import { TextStyleProperties } from './styleTransformers/transformTextStyleProperties';
+import { BlendStyleProperties } from './styleTransformers/transformBlendProperties';
+import { GeometryStyleProperties } from './styleTransformers/transformGeometryStyleProperties';
+import { BorderStyleProperties } from './styleTransformers/transformBorderProperties';
 export type Color = string;
 
-export type StyleOf<T> = T | T[];
+export type StyleOf<T> = Partial<T> | Partial<T>[];
 
 export interface BaseNodeProps {
     name?: string;
@@ -81,7 +87,7 @@ export interface TextNodeProps {
     autoRename?: boolean;
 
     fontSize?: number | symbol;
-    fontName?: FontName | symbol;
+    fontName?: FontName;
     textCase?: TextCase | symbol;
     textDecoration?: TextDecoration | symbol;
     letterSpacing?: LetterSpacing | symbol;
@@ -99,6 +105,11 @@ export interface StarNodeProps {
     innerRadius?: number;
 }
 
+export interface InstanceItemProps {
+    node?: any;
+    preventResizing?: boolean;
+}
+
 export interface DefaultShapeProps extends BaseNodeProps, LayoutProps, GeometryProps, ExportProps, BlendProps {}
 
 export interface DefaultContainerProps
@@ -108,3 +119,19 @@ export interface DefaultContainerProps
         ExportProps,
         BlendProps,
         FrameProps {}
+
+export type CommonStyle = LayoutStyleProperties &
+    YogaStyleProperties &
+    TextStyleProperties &
+    BlendStyleProperties &
+    GeometryStyleProperties &
+    BorderStyleProperties;
+
+export interface SelectionEventProps {
+    onSelectionEnter?: () => void;
+    onSelectionLeave?: () => void;
+}
+
+export interface ChangePageEventProps {
+    onCurrentChange?: (isCurrent: boolean) => void;
+}

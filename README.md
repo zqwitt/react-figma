@@ -1,15 +1,16 @@
-<p align="center"><img src="./logo.svg" width="128"></p>
-
 # React Figma
+
+<img src="./logo.svg" align="right"
+     alt="React Figma logo by Lera Lesik" width="160" height="160">
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 [![npm version](https://img.shields.io/npm/v/react-figma.svg)](https://www.npmjs.com/package/react-figma)
-[![CircleCI](https://circleci.com/gh/react-figma/react-figma.svg?style=svg)](https://circleci.com/gh/react-figma/react-figma)
+[![CircleCI](https://circleci.com/gh/react-figma/react-figma.svg?style=shield)](https://circleci.com/gh/react-figma/react-figma)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-figma)
 
 Render React components to Figma.
 
-* 💡 Inspired by [react-sketchapp](https://github.com/airbnb/react-sketchapp).
+* 🍬 Compatible with [react-native](https://facebook.github.io/react-native/), [react-sketchapp](https://github.com/airbnb/react-sketchapp) API.
 * 🎨 Designed to create manageable design systems.
 * 🦄 Flexible layouts support with [Yoga Layout](https://yogalayout.com/)
 * ♻️ Hydration support.
@@ -21,13 +22,15 @@ Example of code:
 
 ```javascript
 import * as React from 'react';
-import { Page, Rectangle, Text } from 'react-figma';
+import { Page, View, Text } from 'react-figma';
 
 export const App = () => {
     return (
-        <Page name="New page">
-            <Rectangle style={{ width: 200, height: 100, backgroundColor: '#dd55aa' }} />
-            <Text characters="text" style={{ color: '#ffffff' }} />
+        <Page name="New page" isCurrent>
+            <View>
+                <View style={{ width: 200, height: 100, backgroundColor: '#dd55aa' }} />
+                <Text style={{ color: '#ffffff' }}>text</Text>
+            </View>
         </Page>
     );
 };
@@ -103,10 +106,24 @@ export const App = () => {
 };
 ```
 
+## [Docs](https://react-figma.now.sh/)
+
+* [API Overview](https://react-figma.now.sh/docs/API.html)
+  + [render](https://react-figma.now.sh/src/render.html)
+  + [Page](https://react-figma.now.sh/src/components/page/Page.html)
+  + [Frame](https://react-figma.now.sh/src/components/frame/Frame.html)
+  + [View](https://react-figma.now.sh/src/components/view/View.html)
+  + [Text](https://react-figma.now.sh/src/components/text/Text.html)
+  + [Image](https://react-figma.now.sh/src/components/Image/Image.html)
+  + ...
+* [Styling](https://react-figma.now.sh/docs/styling.html)
+* [Architecture](https://react-figma.now.sh/docs/architecture.html)
+
 ## Examples
 
 * [basic](examples/basic)
 * [design-system](examples/design-system)
+* [interactive](examples/interactive)
 * [groups](examples/groups)
 
 ## [Roadmap](docs/roadmap.md)

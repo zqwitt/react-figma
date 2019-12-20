@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { concatMap, debounceTime } from 'rxjs/operators';
+import { concatMap, delay } from 'rxjs/operators';
 import { yogaHandler } from './yogaHandler';
 import { isReactFigmaNode } from '../isReactFigmaNode';
 
@@ -22,7 +22,7 @@ export const updateYogaNode = (node: any) => {
 
 $yogaRoot
     .pipe(
-        debounceTime(100),
+        delay(0),
         concatMap((instance: any) => {
             return new Observable(subscriber => {
                 const handleYogaProps = (newProps, instance) => {
@@ -39,6 +39,9 @@ $yogaRoot
                     subscriber.next({ instance, props: yogaPropsWithoutChildren });
                     if (instance.children) {
                         instance.children.forEach((child, index) => {
+                            if (!isReactFigmaNode(child)) {
+                                return;
+                            }
                             if (!yogaChildren || yogaChildren.length < index + 1) {
                                 updateYogaNode(child);
                                 return;

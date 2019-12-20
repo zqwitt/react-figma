@@ -1,24 +1,25 @@
 {
   "name": "react-figma",
-  "version": "0.0.1-alpha.21",
-  "description": "This plugin template uses Typescript. If you are familiar with Javascript, Typescript will look very familiar. In fact, valid Javascript code is already valid Typescript code.",
-  "main": "./dist/index.js",
+  "version": "0.0.35",
+  "description": "Render React components to Figma",
   "scripts": {
-    "tsc": "tsc -p tsconfig.json",
+    "tsc": "tsc -p tsconfig.json --noEmit",
     "test": "jest",
     "prettify": "prettier \"src/**/*.{js,jsx,ts,tsx}\" \"examples/**/*.{js,jsx,ts,tsx}\" --ignore-path ./.prettierignore --write && git add . && git status",
-    "build": "npm run build:clean && npm run build:lib && npm run build:js",
+    "prettier:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\" \"examples/**/*.{js,jsx,ts,tsx}\"",
+    "build": "npm run build:clean && npm run build:lib",
     "build:clean": "rimraf dist",
     "build:lib": "cross-env BABEL_ENV=production tsc -p tsconfig.json",
-    "build:js": "copyfiles -u 1 src/**/*.js dist",
-    "prepublish": "npm run build",
     "gitbook:clean": "rm -rf _book/",
     "gitbook:start": "gitbook serve",
     "gitbook:build": "gitbook build",
     "now-build": "npm run gitbook:build"
   },
   "jest": {
-    "preset": "ts-jest/presets/js-with-babel"
+    "preset": "ts-jest/presets/js-with-babel",
+    "setupFiles": [
+      "<rootDir>/setup.jest.js"
+    ]
   },
   "author": "Ilya Lesik <ilialesik@gmail.com>",
   "license": "MIT",
@@ -37,7 +38,7 @@
     "figma-plugins"
   ],
   "engines": {
-    "node": ">=10.16.2 <12.0.0"
+    "node": ">=10.15.0 <12.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -48,7 +49,7 @@
     "copyfiles": "^2.1.1",
     "cross-env": "^5.2.0",
     "css-loader": "^3.2.0",
-    "figma-api-stub": "0.0.13",
+    "figma-api-stub": "0.0.27",
     "gitbook-cli": "^2.3.2",
     "gitbook-plugin-anchorjs": "^2.1.0",
     "gitbook-plugin-edit-link": "^2.0.2",
@@ -60,7 +61,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "react": "16.8.6",
-    "react-figma-webpack-config": "^0.0.0",
+    "react-figma-webpack-config": "0.0.2",
     "react-test-renderer": "16.8.6",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
